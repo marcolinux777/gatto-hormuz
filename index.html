@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Il gatto di Schrodinger dello stretto di Hormuz</title>
+
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      color: white;
+      font-family: Arial, Helvetica, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 700px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 38px;
+      margin-bottom: 20px;
+    }
+
+    .hero {
+      width: 100%;
+      border-radius: 16px;
+      border: 2px solid #333;
+      margin-bottom: 18px;
+    }
+
+    .subtitle {
+      color: #999;
+      margin-bottom: 24px;
+      font-size: 15px;
+    }
+
+    button {
+      background: white;
+      color: black;
+      border: none;
+      padding: 16px 28px;
+      border-radius: 14px;
+      font-size: 20px;
+      cursor: pointer;
+      transition: transform 0.15s ease;
+      margin-bottom: 30px;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    .result-box {
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 18px;
+      padding: 30px;
+      min-height: 220px;
+    }
+
+    .status {
+      font-size: 30px;
+      font-weight: bold;
+      margin-top: 12px;
+      margin-bottom: 12px;
+    }
+
+    .emoji {
+      font-size: 70px;
+      margin-top: 10px;
+    }
+
+    .phrase {
+      color: #bbb;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    .loading {
+      color: #777;
+      animation: blink 0.8s infinite;
+    }
+
+    @keyframes blink {
+      0% { opacity: 0.2; }
+      50% { opacity: 1; }
+      100% { opacity: 0.2; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <h1>Il gatto di Schrodinger dello stretto di Hormuz</h1>
+
+  <img src="hero.png" class="hero" alt="vignetta geopolitica">
+
+  <div class="subtitle">
+    Scopri lo stato dello stretto tra due stati alle strette
+  </div>
+
+  <button onclick="observe()">
+    Osserva il gatto 🚢🐱
+  </button>
+
+  <div class="result-box" id="resultBox">
+    <div style="color:#666;">
+      Premi il pulsante e vediamo cosa succede...
+    </div>
+  </div>
+
+</div>
+
+<script>
+
+const outcomes = [
+  {
+    label: "APERTO",
+    emoji: "🚢😺"
+  },
+  {
+    label: "CHIUSO",
+    emoji: "⛔🐱"
+  },
+  {
+    label: "APERTO E CHIUSO CONTEMPORANEAMENTE",
+    emoji: "🚢❓😼"
+  }
+];
+
+const goods = [
+  "banane mature",
+  "pollo fritto",
+  "calzini spaiati",
+  "merendine al cioccolato",
+  "biciclette pieghevoli",
+  "scatoloni di sex toys",
+  "casse di arance",
+  "pigiami a righe viola",
+  "mutandoni ascellari",
+  "tostapane rosa"
+];
+
+const destinations = [
+  "l'Isola di Pasqua",
+  "Bangladesh",
+  "Lussemburgo",
+  "Concorezzo",
+  "Capracotta",
+  "South Dakota",
+  "Roncobilaccio",
+  "Hogwarts"
+];
+
+function randomItem(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function generatePhrase(status) {
+  const good = randomItem(goods);
+  const dest = randomItem(destinations);
+
+  if (status === "APERTO") {
+    return `Sta passando un carico di ${good} per ${dest}`;
+  }
+
+  if (status === "CHIUSO") {
+    return `Bloccato un carico di ${good} diretto a ${dest}`;
+  }
+
+  return `Un carico di ${good} è sia in transito che bloccato verso ${dest}`;
+}
+
+function observe() {
+
+  const box = document.getElementById("resultBox");
+
+  box.innerHTML = `
+    <div class="loading">
+      Analisi in corso... (forse)
+    </div>
+  `;
+
+  setTimeout(() => {
+
+    const outcome = randomItem(outcomes);
+    const phrase = generatePhrase(outcome.label);
+
+    box.innerHTML = `
+      <div class="emoji">${outcome.emoji}</div>
+      <div class="status">${outcome.label}</div>
+      <div class="phrase">${phrase}</div>
+    `;
+
+  }, 1400);
+}
+
+</script>
+
+</body>
+</html>
